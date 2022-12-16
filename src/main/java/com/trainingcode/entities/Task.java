@@ -1,7 +1,10 @@
 package com.trainingcode.entities;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.trainingcode.entities.enums.Priorities;
 import com.trainingcode.entities.enums.TaskStatus;
 import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -16,22 +19,39 @@ public class Task implements Serializable {
     private Instant moment;
 
     private Integer taskStatus;
+    private Integer priorities;
+
+    private String description;
 
     //It is possible to have many tasks for one user
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User client;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     public Task() {
 
     }
 
-    public Task(Long id, Instant moment, TaskStatus taskStatus, User client) {
+    public Task(Long id, Instant moment, TaskStatus taskStatus, User client, Priorities priorities, Category category, String description) {
         super();
         this.id = id;
         this.moment = moment;
         setTaskStatus(taskStatus);
         this.client = client;
+        setPriorities(priorities);
+        this.category = category;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getId() {
@@ -50,12 +70,21 @@ public class Task implements Serializable {
         this.moment = moment;
     }
 
+    public Priorities getPriorities() throws IllegalAccessException {
+        return Priorities.valueOf(priorities);
+    }
+
+    public void setPriorities(Priorities priorities) {
+        if (priorities != null) this.priorities = priorities.getCodes();
+    }
+
+
     public TaskStatus getTaskStatus() throws IllegalAccessException {
         return TaskStatus.valueOf(taskStatus);
     }
 
     public void setTaskStatus(TaskStatus taskStatus) {
-        if(taskStatus != null) this.taskStatus = taskStatus.getCode();
+        if (taskStatus != null) this.taskStatus = taskStatus.getCode();
     }
 
     public User getClient() {
@@ -64,6 +93,14 @@ public class Task implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

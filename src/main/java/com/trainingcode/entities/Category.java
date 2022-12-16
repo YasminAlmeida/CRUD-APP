@@ -1,12 +1,11 @@
 package com.trainingcode.entities;
 
+import java.util.*;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class Category implements Serializable {
@@ -15,10 +14,12 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @JsonIgnore
-    @ManyToMany(mappedBy = "categories")
+
+    @ManyToMany
+    @JoinTable(name = "CATEGORY_TASK", joinColumns = @JoinColumn(name = "CATEGORY_ID"),
+            inverseJoinColumns = @JoinColumn(name = "TASK_ID"))
     //Define that a category can have several priorities
-    private Set<Priorities> priorities = new HashSet<>();
+    private Set<Task> tasks = new HashSet<>();
 
     public Category() {
     }
@@ -29,9 +30,6 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Set<Priorities> getPriorities() {
-        return priorities;
-    }
 
     public Long getId() {
         return id;
@@ -47,6 +45,19 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return id.equals(category.id) && name.equals(category.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
 
