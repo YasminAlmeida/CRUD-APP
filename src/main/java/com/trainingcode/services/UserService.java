@@ -2,6 +2,7 @@ package com.trainingcode.services;
 
 import com.trainingcode.entities.User;
 import com.trainingcode.repositories.UserRepository;
+import com.trainingcode.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(()-> new ResourceNotFoundException(id));
     }
     //Insert a new user on the bd
     public User insert(User obj) {
