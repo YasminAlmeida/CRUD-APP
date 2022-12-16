@@ -1,12 +1,15 @@
 package com.trainingcode.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "USERS")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -17,7 +20,16 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    public User(){
+    //It is possibly to have a few tasks for just one user
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<Task> tasks = new ArrayList<>();
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public User() {
     }
 
     public User(Long id, String name, String email, String phone, String password) {
@@ -70,6 +82,16 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+//        if (this == obj) return true;
+//        if (obj == null) return false;
+//        if(getClass() != obj.getClass())
+//            return false;
+//        User other = (User) obj;
+//        if(id == null){
+//            if (other.id != null) return false;
+//        } else if (!id.equals(other.id)) return false;
+//        return true;
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
@@ -78,6 +100,10 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
+//        final int prime = 31;
+//        int result = 1;
+//        result = prime * result + ((id == null) ? 0 : id.hashCode());
+//        return result;
         return Objects.hash(id);
     }
 }
