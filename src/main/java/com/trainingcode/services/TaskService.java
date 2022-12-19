@@ -30,10 +30,12 @@ public class TaskService {
         Optional<Task> obj = repository.findById(id);
         return obj.get();
     }
-    public Task insert(Task obj){
+
+    public Task insert(Task obj) {
         return repository.save(obj);
     }
-    public void delete(Long id){
+
+    public void delete(Long id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
@@ -42,7 +44,8 @@ public class TaskService {
             throw new DatabaseException(e.getMessage());
         }
     }
-    public Task update(Long id, Task obj){
+
+    public Task update(Long id, Task obj) {
         try {
             Task entity = repository.getOne(id);
             updateData(entity, obj);
@@ -51,6 +54,7 @@ public class TaskService {
             throw new ResourceNotFoundException(id);
         }
     }
+
     private void updateData(Task entity, Task obj) {
         entity.setDescription(obj.getDescription());
         entity.setMoment(obj.getMoment());
