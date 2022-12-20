@@ -6,7 +6,7 @@ import com.trainingcode.entities.enums.TaskStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -15,8 +15,16 @@ public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant moment;
+    @Column(nullable = false)
+    private Date moment;
+
+
+    @PrePersist
+    public void prePersist() {
+        moment = new Date();
+    }
 
     private Integer taskStatus;
     private Integer priorities;
@@ -35,7 +43,7 @@ public class Task implements Serializable {
 
     }
 
-    public Task(Long id, Instant moment, TaskStatus taskStatus, User client, Priorities priorities, Category category, String description) {
+    public Task(Long id, Date moment, TaskStatus taskStatus, User client, Priorities priorities, Category category, String description) {
         super();
         this.id = id;
         this.moment = moment;
@@ -62,11 +70,11 @@ public class Task implements Serializable {
         this.id = id;
     }
 
-    public Instant getMoment() {
+    public Date getMoment() {
         return moment;
     }
 
-    public void setMoment(Instant moment) {
+    public void setMoment(Date moment) {
         this.moment = moment;
     }
 

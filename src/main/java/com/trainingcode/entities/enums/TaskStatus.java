@@ -1,10 +1,10 @@
 package com.trainingcode.entities.enums;
 
 public enum TaskStatus {
-    TASK_OPEN(1),
-    TASK_INPROGRESS(2),
-    TASK_ON_HOLD(3),
-    TASK_CLOSED(4);
+    Open(1),
+    InProgress(2),
+    OnHold(3),
+    Closed(4);
 
     private int code;
 
