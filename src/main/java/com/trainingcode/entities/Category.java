@@ -2,7 +2,6 @@ package com.trainingcode.entities;
 
 import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -59,6 +58,5 @@ public class Category implements Serializable {
     public int hashCode() {
         return Objects.hash(id, name);
     }
-
 
 }
