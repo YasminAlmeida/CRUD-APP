@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
 
 @Entity
@@ -25,7 +26,7 @@ public class Task implements Serializable {
     public void prePersist() {
         moment = new Date();
     }
-
+//    @Enumerated(EnumType.ORDINAL)
     private Integer taskStatus;
     private Integer priorities;
 
@@ -40,9 +41,7 @@ public class Task implements Serializable {
     private Category category;
 
     public Task() {
-
     }
-
     public Task(Long id, Date moment, TaskStatus taskStatus, User client, Priorities priorities, Category category, String description) {
         super();
         this.id = id;

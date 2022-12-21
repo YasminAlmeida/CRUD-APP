@@ -49,14 +49,16 @@ public class TaskService {
             Task entity = repository.getOne(id);
             updateData(entity, obj);
             return repository.save(entity);
-        } catch (EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException | IllegalAccessException e) {
             throw new ResourceNotFoundException(id);
         }
     }
 
-    private void updateData(Task entity, Task obj) {
+    private void updateData(Task entity, Task obj) throws IllegalAccessException {
         entity.setDescription(obj.getDescription());
-        entity.setMoment(obj.getMoment());
         entity.setClient(obj.getClient());
+        entity.setPriorities(obj.getPriorities());
+        entity.setTaskStatus(obj.getTaskStatus());
+        entity.setCategory(obj.getCategory());
     }
 }
