@@ -52,6 +52,5 @@ public class CorsConfiguration implements WebMvcConfigurer, CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1, u2));
         taskRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5, o6));
-
     }
 }

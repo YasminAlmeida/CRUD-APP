@@ -7,8 +7,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Task implements Serializable {
@@ -36,6 +37,7 @@ public class Task implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User client;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -84,7 +86,6 @@ public class Task implements Serializable {
     public void setPriorities(Priorities priorities) {
         if (priorities != null) this.priorities = priorities.getCodes();
     }
-
 
     public TaskStatus getTaskStatus() throws IllegalAccessException {
         return TaskStatus.valueOf(taskStatus);

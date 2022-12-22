@@ -2,8 +2,8 @@ package com.trainingcode.entities;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 
 @Entity
@@ -13,12 +13,15 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @JsonIgnore
+    @OneToMany(mappedBy = "category")
+    private List<Task> tasks = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "CATEGORY_TASK", joinColumns = @JoinColumn(name = "CATEGORY_ID"),
-            inverseJoinColumns = @JoinColumn(name = "TASK_ID"))
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
     //Define that a category can have several priorities
-    private Set<Task> tasks = new HashSet<>();
 
     public Category() {
     }
@@ -28,7 +31,6 @@ public class Category implements Serializable {
         this.id = id;
         this.name = name;
     }
-
 
     public Long getId() {
         return id;
@@ -58,5 +60,4 @@ public class Category implements Serializable {
     public int hashCode() {
         return Objects.hash(id, name);
     }
-
 }

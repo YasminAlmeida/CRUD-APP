@@ -1,7 +1,6 @@
 package com.trainingcode.services;
 
 import com.trainingcode.entities.Task;
-import com.trainingcode.entities.User;
 import com.trainingcode.repositories.TaskRepository;
 import com.trainingcode.repositories.UserRepository;
 import com.trainingcode.services.exceptions.DatabaseException;
@@ -28,6 +27,10 @@ public class TaskService {
     public Task findById(Long id) {
         Optional<Task> obj = repository.findById(id);
         return obj.get();
+    }
+
+    public List<Task> findByCategory(Long id) {
+        return  repository.findByCategory(id);
     }
 
     public Task insert(Task obj) {
@@ -59,6 +62,14 @@ public class TaskService {
         entity.setClient(obj.getClient());
         entity.setPriorities(obj.getPriorities());
         entity.setTaskStatus(obj.getTaskStatus());
-        entity.setCategory(obj.getCategory());
+//        entity.setCategory(obj.getCategory());
+    }
+
+    public List<Task> findByStatus(Long id) {
+        return repository.findByStatus(id);
+    }
+
+    public List<Task> findByPriority(Long id) {
+        return repository.findByPriority(id);
     }
 }

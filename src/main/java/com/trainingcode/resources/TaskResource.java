@@ -30,6 +30,25 @@ public class TaskResource {
         return ResponseEntity.ok().body(obj);
     }
 
+    @RequestMapping(value= "categories/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Task>> findByCategory(@PathVariable Long id) {
+        List<Task> list =  service.findByCategory(id);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @RequestMapping(value= "status/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Task>> findByStatus(@PathVariable Long id) {
+        List<Task> list =  service.findByStatus(id);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @RequestMapping(value= "priority/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Task>> findByPriority(@PathVariable Long id) {
+        List<Task> list =  service.findByPriority(id);
+        return ResponseEntity.ok().body(list);
+    }
+
+
     @PostMapping()
     public ResponseEntity<Task> insert(@RequestBody Task obj) {
         obj = service.insert(obj);
