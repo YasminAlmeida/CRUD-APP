@@ -21,4 +21,9 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @Transactional(readOnly = true)
     @Query("SELECT r FROM Task r WHERE r.priorities = :id")
     List<Task> findByPriority(Long id);
+
+    @Transactional(readOnly = true)
+    @Query("SELECT r FROM Task r WHERE r.client.id = :id")
+    List<Task> findByUser(Long id);
+
 }

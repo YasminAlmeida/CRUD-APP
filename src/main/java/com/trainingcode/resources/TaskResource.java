@@ -48,7 +48,11 @@ public class TaskResource {
         return ResponseEntity.ok().body(list);
     }
 
-
+    @RequestMapping(value= "user/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Task>> findByUser(@PathVariable Long id) {
+        List<Task> list =  service.findByUser(id);
+        return ResponseEntity.ok().body(list);
+    }
     @PostMapping()
     public ResponseEntity<Task> insert(@RequestBody Task obj) {
         obj = service.insert(obj);

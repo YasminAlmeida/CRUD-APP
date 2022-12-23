@@ -62,7 +62,7 @@ public class TaskService {
         entity.setClient(obj.getClient());
         entity.setPriorities(obj.getPriorities());
         entity.setTaskStatus(obj.getTaskStatus());
-//        entity.setCategory(obj.getCategory());
+        entity.setCategory(obj.getCategory());
     }
 
     public List<Task> findByStatus(Long id) {
@@ -71,5 +71,9 @@ public class TaskService {
 
     public List<Task> findByPriority(Long id) {
         return repository.findByPriority(id);
+    }
+
+    public List<Task> findByUser(Long id) {
+        return repository.findByUser(id);
     }
 }
