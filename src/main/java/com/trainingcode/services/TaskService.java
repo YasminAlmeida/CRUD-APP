@@ -5,9 +5,11 @@ import com.trainingcode.repositories.TaskRepository;
 import com.trainingcode.repositories.UserRepository;
 import com.trainingcode.services.exceptions.DatabaseException;
 import com.trainingcode.services.exceptions.ResourceNotFoundException;
+import com.trainingcode.specification.TaskSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,10 +29,6 @@ public class TaskService {
     public Task findById(Long id) {
         Optional<Task> obj = repository.findById(id);
         return obj.get();
-    }
-
-    public List<Task> findByCategory(Long id) {
-        return  repository.findByCategory(id);
     }
 
     public Task insert(Task obj) {
@@ -59,21 +57,23 @@ public class TaskService {
 
     private void updateData(Task entity, Task obj) throws IllegalAccessException {
         entity.setDescription(obj.getDescription());
-        entity.setClient(obj.getClient());
+        entity.setUser(obj.getUser());
         entity.setPriorities(obj.getPriorities());
         entity.setTaskStatus(obj.getTaskStatus());
         entity.setCategory(obj.getCategory());
     }
 
-    public List<Task> findByStatus(Long id) {
-        return repository.findByStatus(id);
+    public List<Task> findByUserAndStatusAndPriorityAndCategory(Optional<Long>  userId, Optional<Long>  statusId, Optional<Long>  priorityId, Optional<Long> categoryId) {
+        Specification<Task> spec = Specification.where(null);
+        spec = spec.and(TaskSpecifications.getByUserAndStatusAndPriorityAndCategory(userId,statusId, priorityId, categoryId));
+        return repository.findAll(spec);
     }
 
-    public List<Task> findByPriority(Long id) {
-        return repository.findByPriority(id);
-    }
 
-    public List<Task> findByUser(Long id) {
-        return repository.findByUser(id);
-    }
+/////////////////////////////
+    //In case choice make your own way with sql query
+//    public List<Task> findByStatus(Long id) {
+//        return repository.findByStatus(id);
+//    }
+///////////////////////////////////////
 }

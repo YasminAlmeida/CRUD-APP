@@ -6,10 +6,7 @@ import com.trainingcode.entities.enums.TaskStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Task implements Serializable {
@@ -22,21 +19,19 @@ public class Task implements Serializable {
     @Column(nullable = false)
     private Date moment;
 
-
     @PrePersist
     public void prePersist() {
         moment = new Date();
     }
-//    @Enumerated(EnumType.ORDINAL)
+    //@Enumerated(EnumType.ORDINAL)
     private Integer taskStatus;
     private Integer priorities;
-
     private String description;
 
     //It is possible to have many tasks for one user
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User client;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -44,12 +39,12 @@ public class Task implements Serializable {
 
     public Task() {
     }
-    public Task(Long id, Date moment, TaskStatus taskStatus, User client, Priorities priorities, Category category, String description) {
+    public Task(Long id, Date moment, TaskStatus taskStatus, User user, Priorities priorities, Category category, String description) {
         super();
         this.id = id;
         this.moment = moment;
         setTaskStatus(taskStatus);
-        this.client = client;
+        this.user = user;
         setPriorities(priorities);
         this.category = category;
         this.description = description;
@@ -95,12 +90,12 @@ public class Task implements Serializable {
         if (taskStatus != null) this.taskStatus = taskStatus.getCode();
     }
 
-    public User getClient() {
-        return client;
+    public User getUser() {
+        return user;
     }
 
-    public void setClient(User client) {
-        this.client = client;
+    public void setUser(User client) {
+        this.user = user;
     }
 
     public Category getCategory() {
@@ -123,4 +118,5 @@ public class Task implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
