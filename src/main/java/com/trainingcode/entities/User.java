@@ -22,7 +22,7 @@ public class User implements Serializable {
 
     //It is possibly to have a few tasks for just one user
     @JsonIgnore
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "user")
     private List<Task> tasks = new ArrayList<>();
 
     public List<Task> getTasks() {

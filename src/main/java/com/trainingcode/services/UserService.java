@@ -40,7 +40,6 @@ public class UserService {
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
-
     }
 
     //Update a user on the bd

@@ -1,7 +1,6 @@
 package com.trainingcode.services;
 
 import com.trainingcode.entities.Category;
-import com.trainingcode.entities.Task;
 import com.trainingcode.repositories.CategoryRepository;
 import com.trainingcode.services.exceptions.DatabaseException;
 import com.trainingcode.services.exceptions.ResourceNotFoundException;
