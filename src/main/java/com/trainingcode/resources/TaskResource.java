@@ -1,6 +1,7 @@
 package com.trainingcode.resources;
 
 import com.trainingcode.entities.Task;
+import com.trainingcode.repositories.TaskRepository;
 import com.trainingcode.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -17,6 +20,8 @@ import java.util.List;
 public class TaskResource {
     @Autowired
     private TaskService service;
+    @Autowired
+    private TaskRepository taskRepository;
 
     @GetMapping
     public ResponseEntity<List<Task>> findAll() {
@@ -28,30 +33,6 @@ public class TaskResource {
     public ResponseEntity<Task> findById(@PathVariable Long id) {
         Task obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
-    }
-
-    @RequestMapping(value= "categories/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Task>> findByCategory(@PathVariable Long id) {
-        List<Task> list =  service.findByCategory(id);
-        return ResponseEntity.ok().body(list);
-    }
-
-    @RequestMapping(value= "status/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Task>> findByStatus(@PathVariable Long id) {
-        List<Task> list =  service.findByStatus(id);
-        return ResponseEntity.ok().body(list);
-    }
-
-    @RequestMapping(value= "priority/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Task>> findByPriority(@PathVariable Long id) {
-        List<Task> list =  service.findByPriority(id);
-        return ResponseEntity.ok().body(list);
-    }
-
-    @RequestMapping(value= "user/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Task>> findByUser(@PathVariable Long id) {
-        List<Task> list =  service.findByUser(id);
-        return ResponseEntity.ok().body(list);
     }
     @PostMapping()
     public ResponseEntity<Task> insert(@RequestBody Task obj) {
@@ -71,5 +52,19 @@ public class TaskResource {
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);
     }
+    @RequestMapping(value = "/search",
+            method = RequestMethod.GET)
+    public ResponseEntity<List<Task>>
+    findByUserAndStatusAndPriorityAndCategory(@RequestParam("user_id") Optional <Long> userId,
+                                              @RequestParam("status_id") Optional <Long> statusId,
+                                              @RequestParam("priority_id") Optional <Long> priorityId,
+                                              @RequestParam("category_id") Optional <Long> categoryId) {
+        System.out.println("userId: " + userId + "statusId: " + statusId + "priorityId: " + priorityId + "categoryId: " + categoryId);
+        List<Task> list =  service.findByUserAndStatusAndPriorityAndCategory(userId,
+                statusId, priorityId, categoryId);
+        return ResponseEntity.ok().body(list);
+    }
 
+    public List<Task> getTasks(){
+        return new ArrayList<>();}
 }
