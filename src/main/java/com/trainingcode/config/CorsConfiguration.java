@@ -42,15 +42,16 @@ public class CorsConfiguration implements WebMvcConfigurer, CommandLineRunner {
 
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
+        User u3 = new User(null, "Jay Yellow", "jay@gmail.com", "977777777", "123456");
 
         Task o1 = new Task(null, new Date(), TaskStatus.Open, u1, Priorities.LOW, cat3,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lectus sit amet eros tincidunt maximus. Curabitur ullamcorper tristique nunc.");
         Task o2 = new Task(null, new Date(), TaskStatus.InProgress, u2, Priorities.HIGH, cat2," Etiam ut mi sit amet est mattis consectetur et sed ante. Mauris ultrices neque ornare tincidunt dapibus. Praesent porta commodo blandit. ");
-        Task o3 = new Task(null, new Date(), TaskStatus.Closed, u1, Priorities.URGENT, cat1,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
-        Task o4 = new Task(null, new Date(), TaskStatus.Open, u1, Priorities.NORMAL, cat1,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
+        Task o3 = new Task(null, new Date(), TaskStatus.Closed, u3, Priorities.URGENT, cat1,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
+        Task o4 = new Task(null, new Date(), TaskStatus.Open, u2, Priorities.NORMAL, cat1,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
         Task o5 = new Task(null, new Date(), TaskStatus.InProgress, u1, Priorities.LOW, cat3,"Aenean volutpat rhoncus justo vitae interdum. Etiam posuere arcu eget mattis iaculis. Pellentesque bibendum tortor tellus, in iaculis eros sodales nec.");
         Task o6 = new Task(null, new Date(), TaskStatus.Closed, u1, Priorities.HIGH, cat2,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
 
-        userRepository.saveAll(Arrays.asList(u1, u2));
+        userRepository.saveAll(Arrays.asList(u1, u2, u3));
         taskRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5, o6));
     }
 }

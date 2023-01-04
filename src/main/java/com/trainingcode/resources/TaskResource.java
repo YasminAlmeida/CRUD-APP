@@ -66,5 +66,6 @@ public class TaskResource {
     }
 
     public List<Task> getTasks(){
-        return new ArrayList<>();}
+        return new ArrayList<>();
+    }
 }

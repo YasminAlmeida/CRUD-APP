@@ -69,7 +69,6 @@ public class TaskService {
         return repository.findAll(spec);
     }
 
-
 /////////////////////////////
     //In case choice make your own way with sql query
 //    public List<Task> findByStatus(Long id) {
