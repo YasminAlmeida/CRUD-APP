@@ -97,7 +97,8 @@ Content-Type: application/json
 RESPONSE: HTTP 204 (No Content)
 
 ---------------------------------------
-
+### Create a User
+```
 POST /users
 Accept: application/json
 Content-Type: application/json
