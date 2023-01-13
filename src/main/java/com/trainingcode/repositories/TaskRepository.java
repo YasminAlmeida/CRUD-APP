@@ -1,16 +1,14 @@
 package com.trainingcode.repositories;
 
 import com.trainingcode.entities.Task;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
+
 public interface TaskRepository extends JpaRepository<Task, Long>,
         JpaSpecificationExecutor<Task>{
-
-
-    //In case choice make your own way with sql query
-//    @Transactional(readOnly = true)
-//    @Query("SELECT r FROM Task r WHERE r.category.id = :id")
-//    List<Task> findByCategory(Long id);
-//
 }

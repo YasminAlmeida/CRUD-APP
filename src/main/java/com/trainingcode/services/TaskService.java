@@ -9,8 +9,13 @@ import com.trainingcode.specification.TaskSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -62,17 +67,12 @@ public class TaskService {
         entity.setTaskStatus(obj.getTaskStatus());
         entity.setCategory(obj.getCategory());
     }
-
-    public List<Task> findByUserAndStatusAndPriorityAndCategory(Optional<Long>  userId, Optional<Long>  statusId, Optional<Long>  priorityId, Optional<Long> categoryId) {
+public Page<Task> findByUserAndStatusAndPriorityAndCategory(Optional<Long>  userId, Optional<Long>  statusId, Optional<Long>  priorityId, Optional<Long> categoryId,int offset, int pageSize) {
         Specification<Task> spec = Specification.where(null);
         spec = spec.and(TaskSpecifications.getByUserAndStatusAndPriorityAndCategory(userId,statusId, priorityId, categoryId));
-        return repository.findAll(spec);
+        Pageable pageable = PageRequest.of(offset, pageSize, Sort.by("id").descending());
+        Page<Task> page = repository.findAll(spec, pageable);
+        return page;
     }
 
-/////////////////////////////
-    //In case choice make your own way with sql query
-//    public List<Task> findByStatus(Long id) {
-//        return repository.findByStatus(id);
-//    }
-///////////////////////////////////////
 }

@@ -1,8 +1,15 @@
 package com.trainingcode.specification;
 import com.trainingcode.entities.Task;
+import com.trainingcode.entities.enums.TaskStatus;
+import com.trainingcode.repositories.TaskRepository;
 import jakarta.persistence.criteria.Predicate;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +34,10 @@ public class TaskSpecifications {
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
-    }
+    };
+//    Pageable page = PageRequest.of(0, 10, new Sort(Sort.Direction.ASC, "id"));
+//    List<Task> tasks = taskRepository.findAll(TaskSpecifications.TaskRepository(specificarion, page));
 
+    PageRequest pageRequest = PageRequest.of(0, 4, Sort.by("id").ascending());
+//    Specification<Task> result = TaskRepository.findAll(spec, pageRequest);
 }

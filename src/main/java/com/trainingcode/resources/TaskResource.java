@@ -4,6 +4,9 @@ import com.trainingcode.entities.Task;
 import com.trainingcode.repositories.TaskRepository;
 import com.trainingcode.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,6 +37,7 @@ public class TaskResource {
         Task obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
     @PostMapping()
     public ResponseEntity<Task> insert(@RequestBody Task obj) {
         obj = service.insert(obj);
@@ -52,20 +56,23 @@ public class TaskResource {
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);
     }
-    @RequestMapping(value = "/search",
-            method = RequestMethod.GET)
-    public ResponseEntity<List<Task>>
-    findByUserAndStatusAndPriorityAndCategory(@RequestParam("user_id") Optional <Long> userId,
-                                              @RequestParam("status_id") Optional <Long> statusId,
-                                              @RequestParam("priority_id") Optional <Long> priorityId,
-                                              @RequestParam("category_id") Optional <Long> categoryId) {
-        System.out.println("userId: " + userId + "statusId: " + statusId + "priorityId: " + priorityId + "categoryId: " + categoryId);
-        List<Task> list =  service.findByUserAndStatusAndPriorityAndCategory(userId,
-                statusId, priorityId, categoryId);
-        return ResponseEntity.ok().body(list);
-    }
 
-    public List<Task> getTasks(){
+@RequestMapping(value = "/search",
+        method = RequestMethod.GET)
+public ResponseEntity<Page<Task>>
+findByUserAndStatusAndPriorityAndCategory(@RequestParam("user_id") Optional<Long> userId,
+                                          @RequestParam("status_id") Optional<Long> statusId,
+                                          @RequestParam("priority_id") Optional<Long> priorityId,
+                                          @RequestParam("category_id") Optional<Long> categoryId,
+                                          @RequestParam("page") int offset,
+                                          @RequestParam("limit") int pageSize) {
+    System.out.println("userId: " + userId + "statusId: " + statusId + "priorityId: " + priorityId + "categoryId: " + categoryId);
+    Page<Task> list = service.findByUserAndStatusAndPriorityAndCategory(userId,
+            statusId, priorityId, categoryId, offset, pageSize);
+    return ResponseEntity.ok().body(list);
+}
+    public List<Task> getTasks() {
         return new ArrayList<>();
     }
+
 }
