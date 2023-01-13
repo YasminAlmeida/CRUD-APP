@@ -6,7 +6,7 @@ This is a sample Java / Maven / Spring Boot (version 1.5.6) application that can
 
 ## How to Run 
 
-This application is packaged as a war which has Tomcat 8 embedded. N
+This application is packaged as a war which has Tomcat 8 embedded.
 
 * Clone this repository 
 * Make sure you are using JDK 1.8 and Maven 3.x
