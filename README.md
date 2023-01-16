@@ -29,6 +29,12 @@ The service is just a simple service for creating a task and user manager. It us
 ```
 http://localhost:8080/h2-console
 ```
+## Pagination configuration
+To access the pagination, just have the configuration below
+```
+http://localhost:8080/tasks/search?page=Number&limit=Number
+```
+
 Here are some endpoints you can call:
 
 ### Get information about tasks, users, etc.
@@ -50,7 +56,8 @@ Content-Type: application/json
 {
     "taskStatus": "Open",
     "priorities": "LOW",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lectus sit amet eros tincidunt maximus. Curabitur ullamcorper tristique nunc.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lectus sit 
+    amet eros tincidunt maximus. Curabitur ullamcorper tristique nunc.",
     "user": {
          "id": 1
     },
@@ -72,7 +79,8 @@ Content-Type: application/json
 {
     "taskStatus": "Open",
     "priorities": "LOW",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lectus sit amet eros tincidunt maximus. Curabitur ullamcorper tristique nunc.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lectus sit amet
+    eros tincidunt maximus. Curabitur ullamcorper tristique nunc.",
     "user": {
          "id": 1
     },
