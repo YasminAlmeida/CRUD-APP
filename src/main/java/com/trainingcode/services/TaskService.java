@@ -67,7 +67,9 @@ public class TaskService {
         entity.setTaskStatus(obj.getTaskStatus());
         entity.setCategory(obj.getCategory());
     }
-public Page<Task> findByUserAndStatusAndPriorityAndCategory(Optional<Long>  userId, Optional<Long>  statusId, Optional<Long>  priorityId, Optional<Long> categoryId,int offset, int pageSize) {
+public Page<Task> findByUserAndStatusAndPriorityAndCategory(Optional<Long>  userId, Optional<Long>  statusId,
+                                                            Optional<Long>  priorityId, Optional<Long> categoryId,
+                                                            int offset, int pageSize) {
         Specification<Task> spec = Specification.where(null);
         spec = spec.and(TaskSpecifications.getByUserAndStatusAndPriorityAndCategory(userId,statusId, priorityId, categoryId));
         Pageable pageable = PageRequest.of(offset, pageSize, Sort.by("id").descending());

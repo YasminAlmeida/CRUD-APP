@@ -57,20 +57,20 @@ public class TaskResource {
         return ResponseEntity.ok().body(obj);
     }
 
-@RequestMapping(value = "/search",
-        method = RequestMethod.GET)
-public ResponseEntity<Page<Task>>
-findByUserAndStatusAndPriorityAndCategory(@RequestParam("user_id") Optional<Long> userId,
-                                          @RequestParam("status_id") Optional<Long> statusId,
-                                          @RequestParam("priority_id") Optional<Long> priorityId,
-                                          @RequestParam("category_id") Optional<Long> categoryId,
-                                          @RequestParam("page") int offset,
-                                          @RequestParam("limit") int pageSize) {
-    System.out.println("userId: " + userId + "statusId: " + statusId + "priorityId: " + priorityId + "categoryId: " + categoryId);
-    Page<Task> list = service.findByUserAndStatusAndPriorityAndCategory(userId,
-            statusId, priorityId, categoryId, offset, pageSize);
-    return ResponseEntity.ok().body(list);
-}
+    @RequestMapping(value = "/search",
+            method = RequestMethod.GET)
+    public ResponseEntity<Page<Task>>
+    findByUserAndStatusAndPriorityAndCategory(@RequestParam("user_id") Optional<Long> userId,
+                                              @RequestParam("status_id") Optional<Long> statusId,
+                                              @RequestParam("priority_id") Optional<Long> priorityId,
+                                              @RequestParam("category_id") Optional<Long> categoryId,
+                                              @RequestParam("page") int offset,
+                                              @RequestParam("limit") int pageSize) {
+        System.out.println("userId: " + userId + "statusId: " + statusId + "priorityId: " + priorityId + "categoryId: " + categoryId);
+        Page<Task> list = service.findByUserAndStatusAndPriorityAndCategory(userId,
+                statusId, priorityId, categoryId, offset, pageSize);
+        return ResponseEntity.ok().body(list);
+    }
     public List<Task> getTasks() {
         return new ArrayList<>();
     }

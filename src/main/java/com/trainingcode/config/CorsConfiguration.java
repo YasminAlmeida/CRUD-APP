@@ -50,8 +50,12 @@ public class CorsConfiguration implements WebMvcConfigurer, CommandLineRunner {
         Task o4 = new Task(null, new Date(), TaskStatus.Open, u2, Priorities.NORMAL, cat1,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
         Task o5 = new Task(null, new Date(), TaskStatus.InProgress, u1, Priorities.LOW, cat3,"Aenean volutpat rhoncus justo vitae interdum. Etiam posuere arcu eget mattis iaculis. Pellentesque bibendum tortor tellus, in iaculis eros sodales nec.");
         Task o6 = new Task(null, new Date(), TaskStatus.Closed, u1, Priorities.HIGH, cat2,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
+        Task o7 = new Task(null, new Date(), TaskStatus.Closed, u3, Priorities.URGENT, cat1,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
+        Task o8 = new Task(null, new Date(), TaskStatus.Open, u2, Priorities.NORMAL, cat1,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
+        Task o9 = new Task(null, new Date(), TaskStatus.InProgress, u1, Priorities.LOW, cat3,"Aenean volutpat rhoncus justo vitae interdum. Etiam posuere arcu eget mattis iaculis. Pellentesque bibendum tortor tellus, in iaculis eros sodales nec.");
+        Task o10 = new Task(null, new Date(), TaskStatus.Closed, u1, Priorities.HIGH, cat2,"Maecenas blandit pellentesque neque, et placerat mauris rhoncus vel. In nec ultricies lectus. Sed ipsum nisl, maximus sit amet dolor ut, tempor rutrum felis.");
 
         userRepository.saveAll(Arrays.asList(u1, u2, u3));
-        taskRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5, o6));
+        taskRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5, o6, o7, o8, o9, o10));
     }
 }

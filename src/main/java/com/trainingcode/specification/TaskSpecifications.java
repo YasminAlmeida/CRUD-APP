@@ -35,9 +35,6 @@ public class TaskSpecifications {
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     };
-//    Pageable page = PageRequest.of(0, 10, new Sort(Sort.Direction.ASC, "id"));
-//    List<Task> tasks = taskRepository.findAll(TaskSpecifications.TaskRepository(specificarion, page));
 
-    PageRequest pageRequest = PageRequest.of(0, 4, Sort.by("id").ascending());
-//    Specification<Task> result = TaskRepository.findAll(spec, pageRequest);
+//    PageRequest pageRequest = PageRequest.of(1, 4, Sort.by("id").ascending());
 }
